@@ -22,6 +22,9 @@ import {
   useGetSimilarMoviesQuery,
 } from "../redux/slices/apiSlice";
 import fallMovie from "../assets/images/fallMovie.jpg";
+import { image500 } from "../utils/imgUtil";
+import { useDispatch, useSelector } from "react-redux";
+import { ADD_TO_FAVORITE } from "../redux/slices/favoritesSlices";
 
 const ios = Platform.OS == "ios";
 const { width, height } = Dimensions.get("window");
@@ -30,12 +33,14 @@ const topMargin = ios ? "" : "mt-3";
 const MoviesScreen = () => {
   const { params: item } = useRoute();
   const navigation = useNavigation();
-  const imgUrl = "http://image.tmdb.org/t/p/w500";
   let bullet = "\u2022";
 
-  const { data, isLoading, isFetching } = useGetMovieDetailsQuery(item);
+  const { data, isLoading } = useGetMovieDetailsQuery(item);
   const { data: similarMovies } = useGetSimilarMoviesQuery(item);
-  const [isFavorite, setIsFavorite] = useState(false);
+  const navigate = useNavigation();
+  const dispatch = useDispatch();
+  const favorite = useSelector((state) => state.rootReducers.favorite);
+  // console.log(favorite);
 
   return (
     <ScrollView
@@ -60,11 +65,12 @@ const MoviesScreen = () => {
 
           <TouchableOpacity
             className="rounded-xl p-1"
-            onPress={() => setIsFavorite(!isFavorite)}
+            onPress={() => dispatch(ADD_TO_FAVORITE(data))}
           >
             <HeartIcon
               size="35"
-              color={isFavorite ? theme.background : "#fff"}
+              color="#fff"
+              // color={favorite ? "red" : "#fff"}
             />
           </TouchableOpacity>
         </SafeAreaView>
@@ -74,7 +80,7 @@ const MoviesScreen = () => {
         ) : (
           <View>
             <Image
-              source={{ uri: `${imgUrl}${data?.poster_path}` }}
+              source={{ uri: `${image500(data?.poster_path)}` }}
               style={{ width, height: height * 0.55 }}
               defaultSource={fallMovie}
             />
@@ -125,6 +131,7 @@ const MoviesScreen = () => {
       <Cast cast={data} />
 
       {/* similar movies */}
+
       <MovieList
         title="Similar Movies"
         hideSeeAllBtn={true}

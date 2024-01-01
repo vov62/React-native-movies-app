@@ -16,25 +16,27 @@ import { useNavigation } from "@react-navigation/native";
 import Loading from "../components/Loading";
 import { useGetSearchTermQuery } from "../redux/slices/apiSlice";
 import fallMovie from "../assets/images/fallMovie.jpg";
+import { useDispatch, useSelector } from "react-redux";
+import { MOVIE_SEARCH } from "../redux/slices/searchSlice";
+import { image185 } from "../utils/imgUtil";
 
 const { width, height } = Dimensions.get("window");
 const ios = Platform.OS == "ios";
 
 const SearchScreen = () => {
   const navigate = useNavigation();
-  const [searchTerm, setSearchTerm] = useState("");
+  const dispatch = useDispatch();
+
+  const searchTermObject = useSelector((state) => state.rootReducers?.search);
+  const searchTerm = searchTermObject?.movieName || "";
   const { data: searchData, isLoading } = useGetSearchTermQuery(searchTerm);
-
-  // console.log(results);
-
-  const imgUrl = "http://image.tmdb.org/t/p/w185";
 
   return (
     <SafeAreaView className="bg-neutral-800 flex-1">
       <View className="mx-4 mb-3 flex-row justify-between items-center border border-neutral-500 rounded-full">
         <TextInput
           value={searchTerm}
-          onChangeText={(val) => setSearchTerm(val)}
+          onChangeText={(val) => dispatch(MOVIE_SEARCH(val))}
           placeholder="Search Movie..."
           placeholderTextColor={"lightgray"}
           className="pb-1 pl-6 flex-1 text-base font-semibold text-white tracking-wider"
@@ -74,7 +76,7 @@ const SearchScreen = () => {
                   <View className="space-y-2 mb-4">
                     <Image
                       source={{
-                        uri: `${imgUrl}${item?.poster_path}` || fallMovie,
+                        uri: `${image185(item?.poster_path)}` || fallMovie,
                       }}
                       style={{ width: width * 0.44, height: height * 0.3 }}
                       defaultSource={fallMovie}

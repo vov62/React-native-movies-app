@@ -10,18 +10,19 @@ import { StatusBar } from "expo-status-bar";
 import {
   Bars3CenterLeftIcon,
   MagnifyingGlassIcon,
+  HeartIcon,
 } from "react-native-heroicons/outline";
 import { styles } from "../theme";
-import { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import TrendingMovies from "../components/TrendingMovies";
 import MovieList from "../components/movie list/MovieList";
-import Loading from "../components/Loading";
 import {
   useGetTrendingMoviesQuery,
   useGetUpcomingMoviesQuery,
   useTopRatedMoviesQuery,
 } from "../redux/slices/apiSlice";
+import { useSelector } from "react-redux";
+import Loading from "../components/Loading";
 
 const ios = Platform.OS == "ios";
 
@@ -34,6 +35,8 @@ const HomeScreen = () => {
     useTopRatedMoviesQuery();
 
   const navigation = useNavigation();
+  const favorite = useSelector((state) => state.rootReducers.favorite);
+  // console.log(favorite);
 
   return (
     <View className="flex-1 bg-neutral-800">
@@ -45,9 +48,20 @@ const HomeScreen = () => {
           <Text className="text-white text-3xl font-bold">
             <Text style={styles.text}>Movies</Text>
           </Text>
-          <TouchableOpacity onPress={() => navigation.navigate("Search")}>
-            <MagnifyingGlassIcon size="30" strokeWidth={2} color="#fff" />
-          </TouchableOpacity>
+
+          <View className="flex-row items-center gap-3">
+            <TouchableOpacity onPress={() => navigation.navigate("Favorite")}>
+              {favorite.favorite.length > 0 ? (
+                <HeartIcon size="30" color="red" fill="red" />
+              ) : (
+                <HeartIcon size="30" color="#fff" />
+              )}
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={() => navigation.navigate("Search")}>
+              <MagnifyingGlassIcon size="30" strokeWidth={2} color="#fff" />
+            </TouchableOpacity>
+          </View>
         </View>
       </SafeAreaView>
 

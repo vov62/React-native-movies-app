@@ -8,8 +8,8 @@ const trendingMoviesEndpoint = `/trending/movie/day?api_key=${apiKey}`;
 const upcomingMoviesEndpoint = `/movie/upcoming?api_key=${apiKey}`;
 const topRatedMoviesEndpoint = `/movie/top_rated?api_key=${apiKey}`;
 
-export const getMoviesData = createApi({
-  reducerPath: "getMoviesData",
+export const getMoviesApi = createApi({
+  reducerPath: "getMoviesApi",
   baseQuery: fetchBaseQuery({ baseUrl: baseUrl }),
   endpoints: (builder) => ({
     getTrendingMovies: builder.query({
@@ -53,4 +53,4 @@ export const {
   useGetActorDetailsQuery,
   useGetActorMoviesQuery,
   useGetSearchTermQuery,
-} = getMoviesData;
+} = getMoviesApi;

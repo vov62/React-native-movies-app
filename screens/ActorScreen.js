@@ -20,6 +20,7 @@ import {
   useGetActorMoviesQuery,
   useGetMovieDetailsQuery,
 } from "../redux/slices/apiSlice";
+import { image342 } from "../utils/imgUtil";
 
 const { width, height } = Dimensions.get("window");
 const ios = Platform.OS == "ios";
@@ -30,7 +31,7 @@ const ActorScreen = () => {
   const { params: item } = useRoute();
   // console.log(item);
 
-  const { data: dataTwo } = useGetActorDetailsQuery(item.id);
+  const { data, isLoading } = useGetActorDetailsQuery(item.id);
   // const { data: some, isLoading: load } = useGetMovieDetailsQuery(item);
   const { data: actorMoviesData } = useGetActorMoviesQuery(item.id);
   // console.log(actorMoviesData?.cast);
@@ -38,7 +39,6 @@ const ActorScreen = () => {
   const imgUrl = "http://image.tmdb.org/t/p/w342";
 
   const [isFavorite, setIsFavorite] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
 
   return (
     <ScrollView
@@ -57,13 +57,6 @@ const ActorScreen = () => {
           className="rounded-xl p-1 "
         >
           <ChevronLeftIcon size="28" strokeWidth={2.5} color="#fff" />
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          className="rounded-xl p-1"
-          onPress={() => setIsFavorite(!isFavorite)}
-        >
-          <HeartIcon size="35" color={isFavorite ? "red" : "#fff"} />
         </TouchableOpacity>
       </SafeAreaView>
 
@@ -84,18 +77,18 @@ const ActorScreen = () => {
           >
             <View className="items-center rounded-full overflow-hidden h-72 w-72 border-2 border-neutral-500">
               <Image
-                source={{ uri: `${imgUrl}${dataTwo?.profile_path}` }}
+                source={{ uri: `${image342(data?.profile_path)}` }}
                 style={{ height: height * 0.43, width: width * 0.74 }}
               />
             </View>
           </View>
           <View className="mt-6">
             <Text className="text-3xl text-white font-bold text-center">
-              {dataTwo?.name}
+              {data?.name}
             </Text>
 
             <Text className="text-base text-neutral-500 text-center">
-              {dataTwo?.place_of_birth}
+              {data?.place_of_birth}
             </Text>
           </View>
 
@@ -103,28 +96,26 @@ const ActorScreen = () => {
             <View className="border-r-2 border-r-neutral-400 px-2 items-center">
               <Text className="text-white font-semibold">Gender</Text>
               <Text className="text-neutral-300 text-sm">
-                {dataTwo?.gender === 1 ? "Female" : "Male"}
+                {data?.gender === 1 ? "Female" : "Male"}
               </Text>
             </View>
 
             <View className="border-r-2 border-r-neutral-400 px-2 items-center">
               <Text className="text-white font-semibold">Birthday</Text>
-              <Text className="text-neutral-300 text-sm">
-                {dataTwo?.birthday}
-              </Text>
+              <Text className="text-neutral-300 text-sm">{data?.birthday}</Text>
             </View>
 
             <View className="px-2 items-center">
               <Text className="text-white font-semibold">Known for</Text>
               <Text className="text-neutral-300 text-sm">
-                {dataTwo?.known_for_department}
+                {data?.known_for_department}
               </Text>
             </View>
 
             <View className="px-2 items-center">
               <Text className="text-white font-semibold">Popularity</Text>
               <Text className="text-neutral-300 text-sm">
-                {dataTwo?.popularity?.toFixed(2)} %
+                {data?.popularity?.toFixed(2)} %
               </Text>
             </View>
           </View>
@@ -132,11 +123,12 @@ const ActorScreen = () => {
           <View className="my-6 mx-4 space-y-2">
             <Text className="text-white text-lg">Biography</Text>
             <Text className="text-neutral-400 tracking-wide">
-              {dataTwo?.biography || "N/A"}
+              {data?.biography || "N/A"}
             </Text>
           </View>
 
           {/* movies */}
+
           {/* <MovieList
             title={"Movies"}
             hideSeeAllBtn={true}

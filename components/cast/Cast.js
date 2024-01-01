@@ -2,10 +2,9 @@ import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useGetActorsDetailsQuery } from "../../redux/slices/apiSlice";
 import fallActor from "../../assets/images/fallPerson.png";
+import { image185 } from "../../utils/imgUtil";
 
 const Cast = ({ cast }) => {
-  const imgUrl = "http://image.tmdb.org/t/p/w185";
-
   const navigation = useNavigation();
   const { data } = useGetActorsDetailsQuery(cast?.id);
 
@@ -30,7 +29,7 @@ const Cast = ({ cast }) => {
                   <Image
                     className="rounded-2xl h-24 w-20"
                     source={{
-                      uri: `${imgUrl}${actor?.profile_path}`,
+                      uri: `${image185(actor?.profile_path)}`,
                     }}
                     defaultSource={fallActor}
                   />

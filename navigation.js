@@ -4,6 +4,7 @@ import HomeScreen from "./screens/HomeScreen";
 import MoviesScreen from "./screens/MoviesScreen";
 import ActorScreen from "./screens/ActorScreen";
 import SearchScreen from "./screens/SearchScreen";
+import FavoritesMovies from "./screens/FavoritesMovies";
 
 const Stack = createNativeStackNavigator();
 
@@ -30,6 +31,11 @@ const Navigation = () => {
           name="Search"
           options={{ headerShown: false }}
           component={SearchScreen}
+        />
+        <Stack.Screen
+          name="Favorite"
+          options={{ headerShown: false }}
+          component={FavoritesMovies}
         />
       </Stack.Navigator>
     </NavigationContainer>
