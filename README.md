@@ -13,7 +13,7 @@
 <h2>How To Run </h2>
 *Available now only in development mode.*
 </br>
-Clone my repo <strong> 'git clone https://github.com/vov62/React-native-movies-app.git',</strong>
+<strong> Clone my repo - 'git clone https://github.com/vov62/React-native-movies-app.git',</strong>
 </br>
 run 'npm install' to install dependencies,
 </br> 
