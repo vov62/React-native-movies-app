@@ -11,23 +11,20 @@
 :white_medium_small_square: Tatilwindcss
 :white_medium_small_square: themoviedb API
 <h2>How To Run </h2>
-simply clone my repo <strong> 'git clone https://github.com/vov62/React-native-movies-app.git',</strong></br>
-run 'npm install' to install dependencies,</br> 
+*Available now only in development mode.*
+</br>
+Clone my repo <strong> 'git clone https://github.com/vov62/React-native-movies-app.git',</strong>
+</br>
+run 'npm install' to install dependencies,
+</br> 
 run 'npm start' to run the project  :grinning:
 </br>
-to run the app on your device you need to download Expo app. 
+to run the project on your device you need to download Expo app.
+Open it in the Expo app on your phone to view it. It will reload if you save edits to your files, and you will see build errors and logs in the terminal.
 </br>
 </br>
 
-
-<img width="600" alt="home" src="https://github.com/vov62/frontend-vinylstore-project/assets/71568364/9a3e2db8-4244-445e-848c-468cf4e0705f">
-</br>
-</br>
-<img width="203" alt="mobile" src="https://github.com/vov62/frontend-vinylstore-project/assets/71568364/949c94a8-4fc8-45b0-88c6-094904dd2ccf">
-</br>
-</br>
-<img width="600" alt="forecast" src="https://github.com/vov62/frontend-vinylstore-project/assets/71568364/24eafcb1-37ce-4051-91a9-33f294c02573">
-</br>
+![פלאפון2](https://github.com/vov62/React-native-movies-app/assets/71568364/42f4afdd-6f72-4207-9dfa-f322d64f560c)
 </br>
 
 
