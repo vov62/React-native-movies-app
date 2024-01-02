@@ -13,6 +13,7 @@ const MovieCard = ({ item, width, height, handleClick }) => {
           width: width * 0.6,
           height: height * 0.4,
         }}
+        defaultSource={fallMovie}
         className="rounded-3xl"
       />
     </TouchableWithoutFeedback>

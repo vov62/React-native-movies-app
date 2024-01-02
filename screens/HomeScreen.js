@@ -36,7 +36,6 @@ const HomeScreen = () => {
 
   const navigation = useNavigation();
   const favorite = useSelector((state) => state.rootReducers.favorite);
-  // console.log(favorite);
 
   return (
     <View className="flex-1 bg-neutral-800">

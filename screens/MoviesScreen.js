@@ -24,7 +24,10 @@ import {
 import fallMovie from "../assets/images/fallMovie.jpg";
 import { image500 } from "../utils/imgUtil";
 import { useDispatch, useSelector } from "react-redux";
-import { ADD_TO_FAVORITE } from "../redux/slices/favoritesSlices";
+import {
+  ADD_TO_FAVORITE,
+  REMOVE_FROM_FAVORITE,
+} from "../redux/slices/favoritesSlices";
 
 const ios = Platform.OS == "ios";
 const { width, height } = Dimensions.get("window");
@@ -39,8 +42,7 @@ const MoviesScreen = () => {
   const { data: similarMovies } = useGetSimilarMoviesQuery(item);
   const navigate = useNavigation();
   const dispatch = useDispatch();
-  const favorite = useSelector((state) => state.rootReducers.favorite);
-  // console.log(favorite);
+  const favorite = useSelector((state) => state.rootReducers.favorite.favorite);
 
   return (
     <ScrollView
@@ -63,16 +65,21 @@ const MoviesScreen = () => {
             <ChevronLeftIcon size="28" strokeWidth={2.5} color="#fff" />
           </TouchableOpacity>
 
-          <TouchableOpacity
-            className="rounded-xl p-1"
-            onPress={() => dispatch(ADD_TO_FAVORITE(data))}
-          >
-            <HeartIcon
-              size="35"
-              color="#fff"
-              // color={favorite ? "red" : "#fff"}
-            />
-          </TouchableOpacity>
+          {favorite.some((movie) => movie.id === data.id) ? (
+            <TouchableOpacity
+              className="rounded-xl p-1"
+              onPress={() => dispatch(REMOVE_FROM_FAVORITE(data.id))}
+            >
+              <HeartIcon size="35" color="red" />
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity
+              className="rounded-xl p-1"
+              onPress={() => dispatch(ADD_TO_FAVORITE(data))}
+            >
+              <HeartIcon size="35" color="#fff" />
+            </TouchableOpacity>
+          )}
         </SafeAreaView>
 
         {isLoading ? (

@@ -21,7 +21,6 @@ const { width, height } = Dimensions.get("window");
 
 const FavoritesMovies = () => {
   const favorite = useSelector((state) => state.rootReducers.favorite);
-  // console.log(favorite);
   const navigate = useNavigation();
   const dispatch = useDispatch();
 
@@ -41,8 +40,6 @@ const FavoritesMovies = () => {
           </TouchableOpacity>
         </View>
       </View>
-
-      {/* data display */}
 
       {favorite.favorite?.length > 0 ? (
         <ScrollView
