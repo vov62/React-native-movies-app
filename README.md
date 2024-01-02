@@ -19,8 +19,9 @@ run 'npm install' to install dependencies,
 </br> 
 run 'npm start' to run the project  :grinning:
 </br>
-to run the project on your device you need to download Expo app.
-Open it in the Expo app on your phone to view it. It will reload if you save edits to your files, and you will see build errors and logs in the terminal.
+<strong>to view the project on your phone device you need to download Expo app. </br>
+It will reload if you save edits to your files, and you will see build errors and logs in the terminal.
+</strong>
 </br>
 </br>
 
