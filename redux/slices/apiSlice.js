@@ -1,7 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-import { Config } from "react-native-config";
-
 const baseUrl = "https://api.themoviedb.org/3";
 const apiKey = "9c671f038c52e7e08dcdf195b04cd325";
 const trendingMoviesEndpoint = `/trending/movie/day?api_key=${apiKey}`;

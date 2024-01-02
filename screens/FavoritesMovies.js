@@ -16,11 +16,12 @@ import { REMOVE_FAVORITE } from "../redux/slices/favoritesSlices";
 import { useNavigation } from "@react-navigation/native";
 import { image185 } from "../utils/imgUtil";
 import fallMovie from "../assets/images/fallMovie.jpg";
+import { favoriteData } from "../redux/slices/favoritesSlices";
 
 const { width, height } = Dimensions.get("window");
 
 const FavoritesMovies = () => {
-  const favorite = useSelector((state) => state.rootReducers.favorite);
+  const favorite = useSelector(favoriteData);
   const navigate = useNavigation();
   const dispatch = useDispatch();
 

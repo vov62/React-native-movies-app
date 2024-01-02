@@ -19,4 +19,6 @@ const searchSlice = createSlice({
 
 export const { MOVIE_SEARCH, RESET_MOVIE_SEARCH } = searchSlice.actions;
 
+export const searchResultsData = (state) => state.rootReducers.search;
+
 export default searchSlice.reducer;

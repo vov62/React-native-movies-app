@@ -17,7 +17,7 @@ import Loading from "../components/Loading";
 import { useGetSearchTermQuery } from "../redux/slices/apiSlice";
 import fallMovie from "../assets/images/fallMovie.jpg";
 import { useDispatch, useSelector } from "react-redux";
-import { MOVIE_SEARCH } from "../redux/slices/searchSlice";
+import { MOVIE_SEARCH, searchResultsData } from "../redux/slices/searchSlice";
 import { image185 } from "../utils/imgUtil";
 
 const { width, height } = Dimensions.get("window");
@@ -27,7 +27,8 @@ const SearchScreen = () => {
   const navigate = useNavigation();
   const dispatch = useDispatch();
 
-  const searchTermObject = useSelector((state) => state.rootReducers?.search);
+  const searchTermObject = useSelector(searchResultsData);
+
   const searchTerm = searchTermObject?.movieName || "";
   const { data: searchData, isLoading } = useGetSearchTermQuery(searchTerm);
 
